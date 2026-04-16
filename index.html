@@ -1,0 +1,1315 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flora & Fauna – Liceul Tehnologic Nicolae Bălcescu, Oltenița</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Lora:ital,wght@0,400;0,600;1,400&family=Raleway:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green-deep: #1a3a1f;
+    --green-mid: #2d6a35;
+    --green-light: #4a9e57;
+    --green-pale: #a8d5ae;
+    --cream: #f5f0e8;
+    --gold: #c9a84c;
+    --gold-light: #e8c96a;
+    --brown: #5c3d1e;
+    --white: #fdfbf7;
+    --shadow: rgba(20, 50, 20, 0.18);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Lora', serif;
+    background: var(--cream);
+    color: var(--green-deep);
+    overflow-x: hidden;
+  }
+
+  
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(26, 58, 31, 0.97);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2.5rem;
+    height: 64px;
+    border-bottom: 2px solid var(--gold);
+    box-shadow: 0 2px 24px var(--shadow);
+  }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    color: var(--gold-light);
+    letter-spacing: 0.04em;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  .nav-tabs {
+    display: flex;
+    gap: 0;
+    list-style: none;
+  }
+
+  .nav-tabs li button {
+    background: none;
+    border: none;
+    color: var(--green-pale);
+    font-family: 'Raleway', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0 1.4rem;
+    height: 64px;
+    cursor: pointer;
+    transition: color 0.25s, background 0.25s;
+    position: relative;
+  }
+
+  .nav-tabs li button::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 50%; right: 50%;
+    height: 3px;
+    background: var(--gold);
+    transition: left 0.25s, right 0.25s;
+  }
+
+  .nav-tabs li button:hover,
+  .nav-tabs li button.active {
+    color: var(--gold-light);
+    background: rgba(201,168,76,0.07);
+  }
+
+  .nav-tabs li button.active::after {
+    left: 0; right: 0;
+  }
+
+  
+  .page { display: none; min-height: 100vh; }
+  .page.active { display: block; }
+
+  
+  #page-intro {
+    padding-top: 64px;
+  }
+
+  .hero {
+    position: relative;
+    height: 520px;
+    background: linear-gradient(135deg, var(--green-deep) 0%, #234d28 50%, #1a3a1f 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .hero-leaves {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .leaf {
+    position: absolute;
+    opacity: 0.12;
+    font-size: 5rem;
+    animation: drift 14s ease-in-out infinite;
+  }
+
+  .leaf:nth-child(1) { top: 8%; left: 3%; animation-delay: 0s; font-size: 4rem; }
+  .leaf:nth-child(2) { top: 20%; right: 6%; animation-delay: 2s; font-size: 6rem; }
+  .leaf:nth-child(3) { bottom: 15%; left: 10%; animation-delay: 4s; font-size: 3.5rem; }
+  .leaf:nth-child(4) { bottom: 25%; right: 12%; animation-delay: 6s; font-size: 5rem; }
+  .leaf:nth-child(5) { top: 50%; left: 50%; animation-delay: 8s; font-size: 7rem; }
+  .leaf:nth-child(6) { top: 5%; left: 40%; animation-delay: 1s; font-size: 3rem; }
+
+  @keyframes drift {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-18px) rotate(8deg); }
+  }
+
+  .hero-inner {
+    position: relative;
+    text-align: center;
+    padding: 2rem;
+    animation: fadeUp 1s ease both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-eyebrow {
+    font-family: 'Raleway', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.2rem, 5vw, 3.8rem);
+    font-weight: 900;
+    color: var(--white);
+    line-height: 1.1;
+    margin-bottom: 0.6rem;
+  }
+
+  .hero-subtitle {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1rem, 2.5vw, 1.5rem);
+    font-style: italic;
+    color: var(--green-pale);
+    margin-bottom: 1.8rem;
+  }
+
+  .hero-divider {
+    width: 80px;
+    height: 2px;
+    background: var(--gold);
+    margin: 0 auto 1.6rem;
+  }
+
+  .hero-desc {
+    font-size: 1rem;
+    color: rgba(255,255,255,0.78);
+    max-width: 560px;
+    line-height: 1.7;
+    margin: 0 auto;
+  }
+
+  
+  .intro-content {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 4rem 2rem 5rem;
+  }
+
+  .section-heading {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.9rem;
+    font-weight: 700;
+    color: var(--green-deep);
+    margin-bottom: 0.5rem;
+    position: relative;
+    display: inline-block;
+  }
+
+  .section-heading::after {
+    content: '';
+    display: block;
+    height: 3px;
+    background: linear-gradient(90deg, var(--gold), transparent);
+    margin-top: 6px;
+    width: 100%;
+  }
+
+  .intro-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+    margin-top: 3rem;
+  }
+
+  .info-card {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 2rem 2rem 1.8rem;
+    box-shadow: 0 4px 30px var(--shadow);
+    border-left: 4px solid var(--green-light);
+    transition: transform 0.3s, box-shadow 0.3s;
+    animation: fadeUp 0.7s ease both;
+  }
+
+  .info-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 40px rgba(20,80,30,0.14);
+  }
+
+  .info-card.wide {
+    grid-column: 1 / -1;
+    border-left-color: var(--gold);
+  }
+
+  .card-icon {
+    font-size: 2rem;
+    margin-bottom: 0.8rem;
+    display: block;
+  }
+
+  .card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--green-mid);
+    margin-bottom: 0.7rem;
+  }
+
+  .card-text {
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: #3a4a3e;
+  }
+
+  .highlight-box {
+    background: linear-gradient(135deg, var(--green-deep), #2d6a35);
+    border-radius: 16px;
+    padding: 2.5rem;
+    margin-top: 3rem;
+    color: var(--white);
+    text-align: center;
+    box-shadow: 0 6px 40px rgba(20,60,25,0.25);
+  }
+
+  .highlight-box h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    color: var(--gold-light);
+    margin-bottom: 1rem;
+  }
+
+  .highlight-box p {
+    font-size: 0.97rem;
+    line-height: 1.85;
+    color: rgba(255,255,255,0.88);
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .stat-row {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .stat {
+    text-align: center;
+  }
+
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.4rem;
+    font-weight: 900;
+    color: var(--gold-light);
+    display: block;
+  }
+
+  .stat-label {
+    font-family: 'Raleway', sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--green-pale);
+    margin-top: 2px;
+  }
+
+  
+  #page-flowers {
+    padding-top: 64px;
+  }
+
+  .flowers-header {
+    background: linear-gradient(160deg, var(--green-deep) 0%, #2a5e31 100%);
+    padding: 2rem 2rem 1.8rem;
+    text-align: center;
+    border-bottom: 3px solid var(--gold);
+  }
+
+  .flowers-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    color: var(--white);
+    font-weight: 900;
+  }
+
+  .flowers-header p {
+    color: var(--green-pale);
+    font-style: italic;
+    margin-top: 0.6rem;
+    font-size: 1rem;
+  }
+
+  
+  .gallery-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    padding: 2rem 2rem 1rem;
+    flex-wrap: wrap;
+  }
+
+  .page-btn {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: 2px solid var(--green-light);
+    background: var(--white);
+    color: var(--green-deep);
+    font-family: 'Raleway', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .page-btn:hover {
+    background: var(--green-light);
+    color: var(--white);
+    border-color: var(--green-light);
+    transform: scale(1.1);
+  }
+
+  .page-btn.active {
+    background: var(--green-deep);
+    color: var(--gold-light);
+    border-color: var(--gold);
+    transform: scale(1.12);
+    box-shadow: 0 2px 12px rgba(26,58,31,0.3);
+  }
+
+  .nav-arrow {
+    background: var(--green-mid);
+    color: var(--white);
+    border: none;
+    border-radius: 50%;
+    width: 42px;
+    height: 42px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .nav-arrow:hover {
+    background: var(--green-deep);
+    transform: scale(1.1);
+  }
+
+  
+  .flower-page-wrapper {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 0.5rem 1rem 4rem;
+    box-sizing: border-box;
+  }
+
+  
+  .flower-card {
+    display: none;
+    background: var(--white);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 8px 40px rgba(20,60,25,0.13);
+    animation: cardIn 0.45s cubic-bezier(0.22,1,0.36,1) both;
+    border: 1px solid rgba(168,213,174,0.35);
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .flower-card.visible {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+  }
+
+  @keyframes cardIn {
+    from { opacity: 0; transform: translateY(22px) scale(0.97); }
+    to   { opacity: 1; transform: translateY(0)    scale(1);    }
+  }
+
+  
+  .flower-slots-wrap {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    flex-shrink: 0;
+  }
+
+  .flower-image-slot {
+    width: 100%;
+    height: 280px;
+    background: linear-gradient(160deg, #1a3a1f 0%, #2d6a35 55%, #4a9e57 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+
+  .flower-image-slot + .flower-image-slot {
+    border-top: 3px solid rgba(255,255,255,0.25);
+  }
+
+  .flower-image-slot::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 35% 35%, rgba(255,255,255,0.08) 0%, transparent 55%);
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .flower-image-slot img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 2;
+    transition: transform 0.7s ease;
+  }
+
+  .flower-image-slot .ph {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0; left: 0;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .flower-card:hover .flower-image-slot img {
+    transform: scale(1.04);
+  }
+
+  .flower-image-slot::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 80px;
+    background: linear-gradient(transparent, rgba(20,50,22,0.45));
+    z-index: 3;
+    pointer-events: none;
+  }
+
+  .page-badge {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    background: rgba(15,40,18,0.82);
+    color: var(--gold-light);
+    font-family: 'Raleway', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 5px 13px;
+    border-radius: 30px;
+    border: 1px solid rgba(201,168,76,0.45);
+    z-index: 5;
+    backdrop-filter: blur(6px);
+  }
+
+  .image-placeholder-icon {
+    font-size: 5rem;
+    opacity: 0.55;
+    margin-bottom: 1rem;
+    position: relative;
+    z-index: 1;
+    animation: bob 3.5s ease-in-out infinite;
+    filter: drop-shadow(0 4px 12px rgba(0,0,0,0.25));
+  }
+
+  @keyframes bob {
+    0%,100% { transform: translateY(0) rotate(-2deg); }
+    50%     { transform: translateY(-9px) rotate(2deg); }
+  }
+
+  .image-placeholder-text {
+    font-family: 'Raleway', sans-serif;
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    position: relative;
+    z-index: 1;
+  }
+
+  
+  .flower-info {
+    width: 100%;
+    padding: clamp(1.2rem, 4vw, 2rem) clamp(1rem, 4vw, 2rem);
+    display: flex;
+    flex-direction: column;
+    background: var(--white);
+    position: relative;
+    box-sizing: border-box;
+  }
+
+  .flower-info::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--gold) 0%, var(--green-light) 50%, transparent 100%);
+  }
+
+  .flower-number {
+    font-family: 'Raleway', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+  }
+
+  .flower-name {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.3rem, 4vw, 2rem);
+    font-weight: 900;
+    color: var(--green-deep);
+    line-height: 1.15;
+    margin-bottom: 0.35rem;
+    word-break: break-word;
+  }
+
+  .flower-latin {
+    font-family: 'Lora', serif;
+    font-size: 0.95rem;
+    font-style: italic;
+    color: var(--green-light);
+    margin-bottom: 1.3rem;
+    opacity: 0.9;
+  }
+
+  .flower-divider {
+    height: 1px;
+    background: linear-gradient(90deg, var(--gold) 0%, rgba(168,213,174,0.35) 55%, transparent 100%);
+    margin-bottom: 1.3rem;
+    border: none;
+  }
+
+  .flower-desc {
+    font-size: clamp(0.82rem, 2.2vw, 0.93rem);
+    line-height: 1.85;
+    color: #3d4f42;
+    margin-bottom: 1.4rem;
+  }
+
+  .flower-tags {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+  }
+
+  .tag {
+    background: linear-gradient(135deg, #edf7ee, #f4fbf4);
+    color: var(--green-mid);
+    border: 1px solid rgba(74,158,87,0.22);
+    border-radius: 30px;
+    padding: 5px 13px;
+    font-family: 'Raleway', sans-serif;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    transition: background 0.2s, transform 0.15s;
+    cursor: default;
+  }
+
+  .tag:hover {
+    background: var(--green-pale);
+    border-color: var(--green-light);
+    transform: translateY(-1px);
+  }
+
+  
+  @media (min-width: 700px) {
+    .flower-card.visible {
+      flex-direction: row;
+      align-items: stretch;
+    }
+    .flower-slots-wrap {
+      width: 360px;
+      min-width: 360px;
+      flex-shrink: 0;
+      flex-direction: column;
+    }
+    .flower-image-slot {
+      width: 100%;
+      flex: 1;
+      min-height: 200px;
+      height: auto;
+      max-width: none;
+    }
+    .flower-info {
+      flex: 1;
+      min-width: 0;
+      padding: 2.5rem 2.8rem;
+      justify-content: flex-start;
+      overflow-y: auto;
+    }
+    .flower-info::before {
+      top: 0; left: 0; right: auto;
+      width: 4px;
+      height: 100%;
+      background: linear-gradient(180deg, var(--gold) 0%, var(--green-light) 50%, transparent 100%);
+    }
+  }
+
+  @media (max-width: 680px) {
+    .intro-grid { grid-template-columns: 1fr; }
+    .info-card.wide { grid-column: 1; }
+    .flower-info { padding: 1.5rem; }
+    .flower-name { font-size: 1.5rem; }
+    .gallery-controls { gap: 0.5rem; }
+    .page-btn { width: 32px; height: 32px; font-size: 0.72rem; }
+    nav { padding: 0 1rem; }
+    .nav-logo { font-size: 0.85rem; }
+  }
+
+  
+  #fs-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: rgba(26,58,31,0.97);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: opacity 0.5s;
+  }
+  #fs-overlay.hide {
+    opacity: 0;
+    pointer-events: none;
+  }
+  #fs-overlay .fs-icon { font-size: 4rem; margin-bottom: 1.2rem; animation: bob 2s ease-in-out infinite; }
+  #fs-overlay h2 {
+    font-family: 'Playfair Display', serif;
+    color: var(--gold-light);
+    font-size: 1.8rem;
+    margin-bottom: 0.7rem;
+  }
+  #fs-overlay p {
+    font-family: 'Raleway', sans-serif;
+    color: var(--green-pale);
+    font-size: 0.9rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+
+<div id="fs-overlay">
+  <div class="fs-icon">🌿</div>
+  <h2>Flora & Fauna</h2>
+  <p>Atinge pentru a intra</p>
+</div>
+<nav>
+  <div class="nav-logo">🌿 Liceul Tehnologic<br><span style="color:var(--gold-light)">Nicolae Bălcescu</span></div>
+  <ul class="nav-tabs">
+    <li><button class="active" onclick="showPage('intro', this)">Introducere</button></li>
+    <li><button onclick="showPage('flowers', this)">Flori 🌸</button></li>
+  </ul>
+</nav>
+
+<section class="page active" id="page-intro">
+  <div class="hero">
+    <div class="hero-leaves" aria-hidden="true">
+      <span class="leaf">🍃</span>
+      <span class="leaf">🌿</span>
+      <span class="leaf">🍀</span>
+      <span class="leaf">🌱</span>
+      <span class="leaf">🍂</span>
+      <span class="leaf">🌾</span>
+    </div>
+    <div class="hero-inner">
+      <p class="hero-eyebrow">Flora & Fauna</p>
+      <h1 class="hero-title">Liceul Tehnologic<br>Nicolae Bălcescu</h1>
+      <p class="hero-subtitle">Oltenița, Județul Călărași</p>
+      <div class="hero-divider"></div>
+      <p class="hero-desc">Un spațiu verde viu, unde natura și educația cresc împreună — descoperă bogăția floristică și faunistică a liceului nostru.</p>
+    </div>
+  </div>
+
+  <div class="intro-content">
+    <h2 class="section-heading">Despre Liceu și Mediul Său Natural</h2>
+
+    <div class="intro-grid">
+
+      <div class="info-card" style="animation-delay:0.1s">
+        <span class="card-icon">🏫</span>
+        <h3 class="card-title">Istoria Instituției</h3>
+        <p class="card-text">Liceul Tehnologic „Nicolae Bălcescu" din Oltenița este una dintre cele mai importante instituții de învățământ din județul Călărași, cu o tradiție îndelungată în formarea tinerilor. Poartă numele marelui om de cultură și revoluționar român Nicolae Bălcescu, un simbol al luptei pentru dreptate și progres social.</p>
+      </div>
+
+      <div class="info-card" style="animation-delay:0.2s">
+        <span class="card-icon">📍</span>
+        <h3 class="card-title">Localizare & Amprentă Verde</h3>
+        <p class="card-text">Situat în orașul Oltenița, la confluența dintre Dunăre și Argeș, liceul beneficiază de o poziție geografică favorabilă biodiversității. Proximitatea față de luncile râurilor și câmpiile Munteniei creează un microclimat propice dezvoltării unei game variate de specii floristice și faunistice atât în curtea școlii, cât și în împrejurimi.</p>
+      </div>
+
+      <div class="info-card" style="animation-delay:0.3s">
+        <span class="card-icon">🌳</span>
+        <h3 class="card-title">Vegetația Curții Școlare</h3>
+        <p class="card-text">Curtea liceului găzduiește o varietate remarcabilă de arbori, arbuști și plante ornamentale. Printre speciile arboricole se numără tei, castani, pini și plopi, care oferă umbră generoasă și adăpost pentru fauna locală. Gardurile vii și jardinierele completează peisajul cu flori sezoniere îngrijite cu devotament de elevi și profesori.</p>
+      </div>
+
+      <div class="info-card" style="animation-delay:0.4s">
+        <span class="card-icon">🦋</span>
+        <h3 class="card-title">Fauna Prezentă</h3>
+        <p class="card-text">Datorită abundenței vegetației, curtea și împrejurimile liceului atrag numeroase specii de insecte polenizatoare — albine, fluturi și bondari — care contribuie la menținerea echilibrului ecologic. Păsările cântătoare, în special mierle, vrăbii și pițigoi, populează copacii, iar rozătoarele mici, gândacii de pădure și alte nevertebrate contribuie la biodiversitatea solului.</p>
+      </div>
+
+      <div class="info-card wide" style="animation-delay:0.5s">
+        <span class="card-icon">🌺</span>
+        <h3 class="card-title">Proiectul de Documentare a Florei Liceului</h3>
+        <p class="card-text">Prezentul proiect și-a propus să catalogheze și să descrie în detaliu toate speciile de flori identificate pe teritoriul Liceului Tehnologic „Nicolae Bălcescu". Fiecare plantă este fotografiată, identificată după numele popular și cel științific, și documentată cu informații despre caracteristicile sale botanice, perioada de înflorire, culori și proprietăți. Acest efort colectiv, realizat de elevi și profesori, transformă simpla observare a naturii într-un act de educație ecologică autentică. Proiectul continuă — noi specii sunt adăugate pe măsură ce sunt identificate în teren.</p>
+      </div>
+
+    </div>
+
+    <div class="highlight-box">
+      <h3>🌍 Educație prin Natură</h3>
+      <p>Liceul Tehnologic „Nicolae Bălcescu" înțelege că un mediu înconjurător sănătos și diversificat este o resursă educativă de neprețuit. Prin studierea florei și faunei proprii, elevii dobândesc competențe de observare, clasificare și respect față de mediu — valori esențiale pentru viitoarele generații. Grădinile și spațiile verzi ale liceului funcționează ca un laborator natural în aer liber, deschis tuturor curioșilor.</p>
+      <div class="stat-row">
+        <div class="stat">
+          <span class="stat-num">41</span>
+          <span class="stat-label">Specii de flori<br>documentate</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">4</span>
+          <span class="stat-label">Anotimpuri de<br>observare</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">∞</span>
+          <span class="stat-label">Curiozitate<br>studențească</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="credits-section">
+    <div class="credits-inner">
+      <div class="credits-badge">🌿 Săptămâna Școala Verde 2026</div>
+      <h3 class="credits-title">Despre acest proiect</h3>
+      <p class="credits-text">Acest proiect a fost desfășurat în cadrul <strong>Săptămânii Școala Verde 2026</strong>, în perioada <strong>30 martie – 3 aprilie</strong>, la Liceul Tehnologic „Nicolae Bălcescu" din Oltenița. Proiectul și-a propus catalogarea și documentarea florei și faunei din incinta liceului, contribuind la educația ecologică a elevilor și la cunoașterea biodiversității locale.</p>
+      <div class="credits-divider"></div>
+      <p class="credits-label">Realizat de:</p>
+      <div class="credits-names">
+        <span class="credit-name">Voicu Darius</span>
+        <span class="credit-name">Badea Mario</span>
+        <span class="credit-name">Buzatu Adrian</span>
+        <span class="credit-name">Netezescu Marian</span>
+        <span class="credit-name">Tudorache Denis</span>
+        <span class="credit-name">Lungu Elena</span>
+        <span class="credit-name">Olteniceanu Antonia</span>
+      </div>
+      <p class="credits-class">Clasa a 9-A · 2026–2027</p>
+    </div>
+  </div>
+
+  <footer>
+    <strong>Liceul Tehnologic „Nicolae Bălcescu"</strong> · Oltenița, Județul Călărași<br>
+    Proiect Flora & Fauna — realizat de Clasa a 9-A 2026-2027
+  </footer>
+</section>
+
+<section class="page" id="page-flowers">
+  <div class="flowers-header">
+    <h2>🌸 Flora Liceului — Galerie de Flori</h2>
+    <p>Răsfoiți paginile pentru a descoperi speciile identificate în incinta liceului</p>
+  </div>
+
+  <div class="gallery-controls">
+    <button class="nav-arrow" onclick="changeFlowerPage(-1)" title="Pagina anterioară">&#8592;</button>
+    <div id="page-dots" style="display:flex;gap:0.45rem;flex-wrap:wrap;justify-content:center;max-width:520px;"></div>
+    <button class="nav-arrow" onclick="changeFlowerPage(1)" title="Pagina următoare">&#8594;</button>
+  </div>
+
+  <div class="page-indicator-wrap"><div class="page-indicator" id="page-indicator">Pagina 1 din 41</div></div>
+
+  <div class="flower-page-wrapper" id="flower-wrapper">
+    
+  </div>
+
+  <footer>
+    <strong>Liceul Tehnologic „Nicolae Bălcescu"</strong> · Oltenița, Județul Călărași<br>
+    Proiect Flora & Fauna — realizat de Clasa a 9-A 2026-2027
+  </footer>
+</section>
+
+<script>
+
+const flowers = [
+  {
+    name: "Bănuț / Pârguță albă",
+    latin: "Bellis perennis (formă albă)",
+    desc: "Bănuțul alb, cunoscut și sub numele de pârguță albă, este o plantă erbacee perenă din familia Asteraceae, întâlnită frecvent în gazonul și spațiile verzi ale liceului. Florile sale mici și delicate prezintă petale albe dispuse radiar în jurul unui centru galben-auriu, creând un contrast elegant și luminos. Înflorește din primăvară devreme și poate continua până toamna târziu, fiind una dintre cele mai rezistente și persistente flori de gazon. Planta atinge înălțimi mici, de 5–15 cm, adaptându-se perfect la tunderi repetate. Este iubită de albine și alte insecte polenizatoare și are o lungă tradiție în medicina populară românească.",
+    tags: ["perenă", "primăvară–toamnă", "albă", "gazon", "Asteraceae"],
+    icon: "🌼"
+  },
+  {
+    name: "Bănuț / Pârguță roz",
+    latin: "Bellis perennis (formă roz)",
+    desc: "Varianta roz a bănuțului este identică ca structură cu cea albă, diferind prin culoarea petalelor care prezintă nuanțe delicate de roz, de la roz-pal la roz-aprins. Această formă colorată apare natural prin variație genetică și este adesea cultivată deliberat în parcuri și grădini pentru efectul ornamental. În curtea liceului, pârguțele roz punctează verdele gazonului cu pete calde de culoare, atrăgând privirea și creând o atmosferă veselă. Ca și surata sa albă, înflorește abundent în lunile de primăvară și are un rol important în sprijinirea biodiversității insectelor polenizatoare locale.",
+    tags: ["perenă", "primăvară–toamnă", "roz", "gazon", "Asteraceae"],
+    icon: "🌸"
+  },
+  {
+    name: "Zambilă albă",
+    latin: "Hyacinthus orientalis (alb)",
+    desc: "Zambila albă este o bulboasă de primăvară cu un parfum intens și rafinat, considerată una dintre cele mai elegante flori ale anotimpului rece care se trezește la viață. Tulpina sa cărnoasă și dreaptă poartă un ciorchine dens de flori tubulare albe, dispuse simetric, care emană un miros dulce și persistent perceptibil de la distanță. Înflorește în martie–aprilie și atinge 20–30 cm înălțime. Bulbii sunt plantați toamna și rezistă în sol mai mulți ani. Prezența sa în curtea liceului adaugă o notă de puritate și eleganță clasică, iar parfumul său poate transforma o plimbare obișnuită printre straturile de flori într-o experiență senzorială memorabilă.",
+    tags: ["bulboasă", "primăvară", "albă", "parfumată", "ornamentală"],
+    icon: "🌷"
+  },
+  {
+    name: "Zambilă mov",
+    latin: "Hyacinthus orientalis (mov/violet)",
+    desc: "Zambila mov este poate cea mai populară și mai recunoscută variantă a speciei, cu florile sale compacte de culoare violet-intens până la mov-lavandă. Parfumul său dulce-floral este iconic pentru primăvara românească și este adesea folosit în industria parfumurilor. În grădina liceului, zambilele mov formează grupuri dense și viu colorate, oferind un spectacol vizual impresionant în lunile martie și aprilie. Planta preferă soluri bine drenate și expunere la soare sau semi-umbră. Culoarea sa intensă atrage fluturii și albinele, contribuind activ la lanțul ecologic al polenizării în spațiul verde al școlii.",
+    tags: ["bulboasă", "primăvară", "mov", "parfumată", "ornamentală"],
+    icon: "💐"
+  },
+  {
+    name: "Troscot",
+    latin: "Polygonum aviculare",
+    desc: "Troscotul este o plantă anuală extrem de rezistentă din familia Polygonaceae, care crește culcat pe pământ, formând covoare dense pe cărări, margini de drumuri și zone călcate frecvent. Tulpinile subțiri și ramificate pornesc dintr-un punct central și se întind radiar, cu frunzulițe mici, ovale și alungite dispuse altern. Florile sunt minuscule, alb-roz sau verzui, grupate câte 1–3 la axila frunzelor, și înfloresc din mai până toamna târziu. Este una dintre cele mai tolerante plante la tasarea solului — crește acolo unde alte plante nu supraviețuiesc. În medicina tradițională românească, troscotul era folosit pentru proprietăți astringente și hemostatice.",
+    tags: ["anuală", "vară-toamnă", "alb-roz", "rezistentă", "Polygonaceae"],
+    icon: "🌿"
+  },
+  {
+    name: "Lipicioasă",
+    latin: "Galium aparine",
+    desc: "Lipicioasa, numită astfel datorită proprietății remarcabile de a se agăța de orice suprafață cu care intră în contact — haine, blana animalelor sau alte plante — este o plantă anuală cățărătoare din familia Rubiaceae. Tulpinile sale pătrate și frunzele înguste sunt acoperite cu mici cârlige (trichomi cu vârfuri recurvate) care funcționează ca un sistem natural de velcro. Florile sunt minuscule, albe, cu patru petale, grupate în mici inflorescențe axilare. Deși considerată adesea buruiană, joacă un rol ecologic important ca sursă de hrană pentru păsări și ca plantă gazdă pentru unele insecte. Este o prezență caracteristică a primăverii în spațiile verzi ale liceului.",
+    tags: ["anuală", "primăvară", "albă", "cățărătoare", "Rubiaceae"],
+    icon: "🌿"
+  },
+  {
+    name: "Măcriș de câmp / Rumex",
+    latin: "Rumex obtusifolius",
+    desc: "Rumex obtusifolius, cunoscut popular ca măcriș de câmp sau lobodă sălbatică, este o plantă erbacee perenă robustă din familia Polygonaceae. Se recunoaște după frunzele mari, late, cu baza cordată (în formă de inimă), de un verde intens, cu nervura mediană proeminentă. Tulpina poate atinge 60–120 cm înălțime și poartă inflorescențe ramificate cu fructe mici de culoare ruginie-brună la maturitate. Rădăcina pivotantă puternică și adâncă îi conferă o rezistență remarcabilă — planta reapare an de an chiar și după cosire. Este folosită în medicina populară pentru proprietăți astringente, iar frunzele tinere erau consumate în salate tradiționale.",
+    tags: ["perenă", "primăvară-vară", "verde", "medicinală", "Polygonaceae"],
+    icon: "🌿"
+  },
+  {
+    name: "Toporași / Violete",
+    latin: "Viola odorata / Viola tricolor",
+    desc: "Toporașii sunt unele dintre cele mai iubite și mai evocatoare flori ale primăverii românești, cu o tradiție poetică și culturală îndelungată. Florile lor mici, cu cinci petale asimetrice în tonuri de violet, mov-albăstrui sau bicolore alb-galben-violet, apar timpuriu în sezon, uneori chiar de la sfârșitul lunii februarie. Plantele sunt joase, de 10–20 cm, cu frunze în formă de inimă. Specia Viola odorata emite un parfum delicat, dulce și discret, specific primăverii. Sunt plante care se înmulțesc ușor și colonizează rapid zone umede și semi-umbrite. În curtea liceului, toporașii cresc spontan și apar surprinzător în colțuri neașteptate, aducând cu ei bucuria reînnoirii sezonului.",
+    tags: ["perenă", "primăvară timpurie", "violet", "parfumată", "Violaceae"],
+    icon: "💜"
+  },
+  {
+    name: "Iarbă de gazon",
+    latin: "Lolium perenne / Festuca arundinacea",
+    desc: "Gazonul liceului este alcătuit predominant din specii de graminee rezistente și cu creștere densă, cel mai adesea raigras peren (Lolium perenne) și festuca (Festuca arundinacea). Aceste plante formează un covor verde compact și uniform, esențial pentru aspectul îngrijit al curții. Tulpinile subțiri și frunzele alungite, de un verde viu, creează o textură fină plăcută la vedere și la atingere. Gazonul joacă un rol ecologic crucial: stabilizează solul, absoarbe apa de ploaie, reduce praful și oferă un microclimat mai răcoros în zilele toride. Este și habitat pentru numeroase insecte, viermi și microorganisme care mențin fertilitatea solului.",
+    tags: ["perenă", "tot sezonul", "verde", "Poaceae", "habitat"],
+    icon: "🌱"
+  },
+  {
+    name: "Pătlagina nativă",
+    latin: "Plantago major",
+    desc: "Pătlagina mare (Plantago major) este una dintre cele mai cunoscute și mai folosite plante medicinale spontane din flora României. Frunzele sale late, ovale, cu nervuri paralele proeminente și peț lung, formează o rozetă basală compactă la suprafața solului. Tulpina florală dreaptă, de 15–40 cm, poartă un spic cilindric lung cu flori mici verzui-albicioase. Înflorește din mai până în octombrie și crește în locuri bătătorite, pe margini de drumuri și în gazon. Este celebră în etnobotanica românească pentru proprietăți antiinflamatoare, cicatrizante și expectorante — frunzele proaspete aplicate pe răni și înțepături oferă alinare rapidă.",
+    tags: ["perenă", "mai-octombrie", "verde", "medicinală", "Plantaginaceae"],
+    icon: "🌿"
+  },
+  {
+    name: "Salvia",
+    latin: "Salvia officinalis / Salvia nemorosa",
+    desc: "Salvia este un arbust sau plantă erbacee perenă din familia Lamiaceae, apreciată atât pentru valoarea ornamentală, cât și pentru proprietățile medicinale și aromatice excepționale. Frunzele sale ovale, cu suprafață catifelată și ușor ridată, emană un parfum aromatic intens și caracteristic datorită uleiurilor esențiale. Florile sunt bilobate, de culoare albastru-violet până la mov intens, grupate în spice verticilate elegante. Înflorește în mai–iulie și atrage în mod deosebit albinele și fluturii. Salviei i se atribuie în mod tradițional proprietăți antiseptice, antiinflamatoare și digestive, iar în bucătăria românească este folosită ca condiment aromatic.",
+    tags: ["perenă", "mai-iulie", "albastru-violet", "medicinală", "Lamiaceae"],
+    icon: "🌺"
+  },
+  {
+    name: "Lalele galbene",
+    latin: "Tulipa gesneriana (galben)",
+    desc: "Lalelele galbene aduc luminozitate și veselie în orice spațiu verde, iar prezența lor în grădina liceului este o bucurie vizuală inconfundabilă. Culoarea galben-aurie a petalelor reflectă lumina soarelui și creează un contrast superb cu verdele frunzelor și al gazonului. Structural identice cu lalelele roșii, cele galbene par să emane o energie mai caldă și mai prietenoasă, asociate adesea cu simboluri de prosperitate și optimism. Înfloresc în același interval, aprilie–mai, și necesită aceleași condiții de îngrijire. Combinată cu alte culori din strat, lalele galbenă devine un element cheie al compoziției florale a liceului.",
+    tags: ["bulboasă", "primăvară", "galbenă", "ornamentală", "Liliaceae"],
+    icon: "🌷"
+  },
+  {
+    name: "Știevie sălbatică",
+    latin: "Rumex crispus / Beta vulgaris subsp. maritima",
+    desc: "Știevia sălbatică este o plantă erbacee robustă, înrudită cu sfecla cultivată, cu frunze mari, ondulate sau crestate la margini, de un verde lucios. Apare spontan pe terenuri perturbate, margini de drumuri și în zone cu sol bogat. Tulpina poate atinge 60–100 cm și produce inflorescențe ramificate cu fructe mici. Frunzele tinere au o textură cărnoasă și au fost folosite tradițional în gastronomia rurală — fierte sau sotate ca substitut al spanacului. Planta este bogată în oxalați, fier și vitamina C. Prezența sa în curtea liceului este un exemplu de floră ruderală adaptabilă, cu valoare etnobotanică documentată în tradițiile locale.",
+    tags: ["perenă", "primăvară-vară", "verde", "comestibilă", "Polygonaceae"],
+    icon: "🌿"
+  },
+  {
+    name: "Lalele (genul Tulipa)",
+    latin: "Tulipa sp.",
+    desc: "Lalelele din genul Tulipa reprezintă unele dintre cele mai iubite și mai cultivate plante ornamentale bulboase din lume, cu o istorie fascinantă ce pornește din stepele Asiei Centrale și Orientul Mijlociu. În curtea liceului, lalelele apar în diverse culori — roșu, galben, portocaliu, roz sau bicolor — oferind un spectacol vizual remarcabil în lunile aprilie–mai. Fiecare plantă produce o singură floare solitară, susținută de o tulpină dreaptă și cărnoasă de 25–50 cm, cu frunze late, ceroase, de un verde-albăstrui caracteristic. Bulbii sunt plantați toamna și pot fi recuperați după ofilire pentru replantare. Lalelele sunt și un simbol cultural important, asociate cu primăvara și reînnoirea.",
+    tags: ["bulboasă", "aprilie-mai", "diverse culori", "ornamentală", "Liliaceae"],
+    icon: "🌷"
+  },
+  {
+    name: "Păpădie boboc",
+    latin: "Taraxacum officinale (stadiu de boboc)",
+    desc: "Păpădia în stadiu de boboc reprezintă momentul de tranziție dintre vegetativ și floral — tulpina cilindrică, goală în interior și plină de latex alb, se înalță din rozetă și poartă în vârf un boboc compact, învelit în bractee verzi. Acest stadiu durează câteva zile înainte ca florile ligulate galbene să se desfacă complet. Bobocul de păpădie este comestibil și murat în oțet reproduce gustul caperelor, o curiozitate gastronomică puțin știută. Observarea acestui stadiu în curtea liceului oferă un exemplu viu de fenologie — studiul momentelor cheie din ciclul biologic al plantelor în relație cu anotimpurile și condițiile climatice.",
+    tags: ["perenă", "primăvară", "galben", "fenologie", "Asteraceae"],
+    icon: "🌼"
+  },
+  {
+    name: "Narcise galbene",
+    latin: "Narcissus pseudonarcissus",
+    desc: "Narcisa galbenă este una dintre florile simbol ale primăverii europene, cu o siluetă inconfundabilă: șase tepale galbene dispuse în stea în jurul unei coroane centrale (paracorolă) mai închisă la culoare, tubulară și dantelată la margini. Floarea emană un parfum plăcut, dulce-pudrat, caracteristic. Narcisele cresc din bulbi plantați toamna, ating 30–45 cm înălțime și înfloresc în martie–aprilie. Preferă soluri bine drenate și expoziție solară sau semi-umbră. Toate părțile plantei sunt toxice dacă sunt ingerate, datorită alcaloidului narcissina — o informație botanică importantă pentru elevi. În grădina liceului formează aranjamente luminoase și galbene, anunțând cu entuziasm sosirea primăverii.",
+    tags: ["bulboasă", "primăvară", "galbenă", "parfumată", "Amaryllidaceae"],
+    icon: "🌼"
+  },
+  {
+    name: "Rogoz",
+    latin: "Carex sp.",
+    desc: "Rogozul este o plantă erbacee perenă din familia Cyperaceae, adesea confundat cu ierburile sau papura, dar distinct prin tulpina triunghiulară în secțiune transversală — un caracter botanic definitoriu al familiei. Frunzele sunt lungi, înguste și cu marginile tăioase (pot produce tăieturi fine la atingere). Înflorește primăvara–vara, producând spice brune-verzui compacte. Crește în locuri umede, pe marginea apelor, în zone cu sol argilos și umed. Prezența rogozului în curtea liceului indică zone cu umiditate ridicată sau drenaj slab. Este o plantă importantă ecologic — oferă adăpost și hrană pentru insecte, păsări și amfibieni în habitate umede.",
+    tags: ["perenă", "primăvară-vară", "verde", "Cyperaceae", "zone umede"],
+    icon: "🌾"
+  },
+  {
+    name: "Corcoduș înflorit",
+    latin: "Prunus cerasifera",
+    desc: "Corcodușul înflorit este unul dintre cele mai timpurii și mai spectaculoase arbori cu flori din România, înflorind adesea în februarie–martie, înainte de apariția frunzelor. Ramurile goale se acoperă complet cu mici flori albe sau roz-pal cu cinci petale rotunde și numeroase stamine, creând un efect de nea înflorită de o frumusețe aparte. Parfumul delicat atrage albinele încă din primele zile calde ale anului, furnizând una dintre primele surse de nectar și polen după iarnă. Ulterior înfloririi, arborele produce micile fructe — corcodușele —, galbene sau roșii-violacee, acre și aromate. Prezența corcodușului în curtea liceului este un reper fenologic și un simbol al reînnoirii naturii.",
+    tags: ["arbore", "primăvară timpurie", "alb-roz", "fructifer", "Rosaceae"],
+    icon: "🌸"
+  },
+  {
+    name: "Magnolie roz",
+    latin: "Magnolia × soulangeana",
+    desc: "Magnolia roz este unul dintre cei mai impresionanți și mai eleganți arbori ornamentali ce pot fi întâlniți în spațiile verzi din România. Înflorește spectaculos primăvara, înainte de apariția frunzelor, acoperindu-se cu flori mari, cărnoase, cu formă de cupă sau stea, în tonuri de roz-purpuriu la exterior și alb-crem la interior. Fiecare floare poate atinge 15–25 cm diametru și emană un parfum dulce și exotic. Magnolia este considerată una dintre cele mai vechi plante cu flori de pe Terra, cu o genealogie de peste 95 de milioane de ani. Prezența unui astfel de arbore în curtea liceului este un privilegiu botanic și un subiect ideal de studiu pentru elevi interesați de biologie și horticultură.",
+    tags: ["arbore", "primăvară", "roz", "ornamental", "Magnoliaceae"],
+    icon: "🌺"
+  },
+  {
+    name: "Veronica",
+    latin: "Veronica sp.",
+    desc: "Veronica (ventrilica sau doritoarea) este o plantă erbacee perenă sau anuală din familia Plantaginaceae, recunoscută după florile sale mici și delicate de culoare albastru-ceruleu cu dungi mai închise. Apare primăvara devreme prin gazon, iarbă și locuri semi-umbrite, formând colonii dense și spectaculoase când înflorește în masă. Tulpinile târâtoare sau ascendente, acoperite cu perișori fini, poartă flori de 8–12 mm diametru, cu patru petale inegale. Este o importantă sursă de nectar pentru albine și insecte polenizatoare la ieșirea din iarnă. În medicina populară românească, veronicele erau folosite în infuzii cu proprietăți expectorante și depurative.",
+    tags: ["perenă", "primăvară", "albastru-ceruleu", "medicinală", "Plantaginaceae"],
+    icon: "💙"
+  },
+  {
+    name: "Lamium (Urzică moartă)",
+    latin: "Lamium purpureum / Lamium album",
+    desc: "Lamium, cunoscut popular drept urzică moartă, este o plantă erbacee din familia Lamiaceae care seamănă la prima vedere cu urzica, dar nu înțeapă deloc — de unde și numele popular. Frunzele ovate, zimțate și ușor ridulate sunt dispuse opus pe o tulpină pătrat în secțiune, caracteristică întregii familii. Florile bilobate, roz-purpurii (la L. purpureum) sau albe (la L. album), sunt grupate în verticile la axilele frunzelor superioare. Înflorește devreme, din martie, și este una dintre primele surse de nectar pentru bondari și albine după iarnă. Are proprietăți medicinale documentate: antiinflamator, astringent și cicatrizant, folosit în fitoterapia tradițională.",
+    tags: ["anuală/perenă", "martie-mai", "roz-purpuriu", "medicinală", "Lamiaceae"],
+    icon: "💜"
+  },
+  {
+    name: "Trandafir — tije cu spini",
+    latin: "Rosa sp. (stadiu vegetativ)",
+    desc: "Trandafirul documentat în acest stadiu nu prezintă încă flori sau frunze — este surprins în faza de tulpini lemnoase, cu spinii caracteristici vizibili cu claritate. Spinii trandafirului (tehnic numiți aculi) sunt excrescențe epidermice, nu formațiuni lemnoase veritabile, și au rolul de a proteja planta de erbivore. Forma, dimensiunea și culoarea lor variază în funcție de specie și soi. Observarea tulpinilor de trandafir iarna sau la începutul primăverii, înainte de dezmugurire, este un exercițiu botanic valoros care permite identificarea plantei după structura tulpinii. Trandafirul este unul dintre cei mai cultivați arbuști ornamentali din lume și un simbol cultural universal al frumuseții și iubirii.",
+    tags: ["arbust", "primăvară timpurie", "vegetativ", "ornamental", "Rosaceae"],
+    icon: "🌹"
+  },
+  {
+    name: "Creț / Criminal",
+    latin: "Chelidonium majus",
+    desc: "Rostopasca (Chelidonium majus), numită popular și criminal, negelariță sau laptele-cucului, este o plantă erbacee perenă din familia Papaveraceae, ușor de recunoscut după latexul galben-portocaliu intens care curge din tulpină la rupere. Florile sunt mici, galbene, cu patru petale dispuse în cruce, grupate în umbelă la vârful tulpinii. Frunzele sunt adânc penate, de un verde-gri, cu o textură moale. Înflorește din aprilie până în septembrie și crește în locuri umbrite, pe lângă ziduri, garduri și în margini de pădure. ATENȚIE: planta este toxică — latexul său caustic era folosit tradițional pentru tratarea negilor și verucilor, dar poate irita pielea și mucoasele.",
+    tags: ["perenă", "aprilie-septembrie", "galben", "toxică/medicinală", "Papaveraceae"],
+    icon: "🌼"
+  },
+  {
+    name: "Lăcrămioare",
+    latin: "Convallaria majalis",
+    desc: "Lăcrămioarele sunt printre cele mai iubite și mai delicate flori de primăvară, cu o semnificație culturală profundă în Europa. Florile lor mici, albe, în formă de clopoțel, atârnă pe o tulpiniță arcuită de 15–30 cm și emană un parfum dulce, rafinat și persistent, folosit în parfumerie de sute de ani. Frunzele sunt late, eliptice, de un verde intens lucios, dispuse în perechi. Înfloresc în aprilie–mai și preferă locuri umbrite, sub copaci sau la marginea pădurilor. IMPORTANT: toate părțile plantei sunt extrem de toxice — conțin glicozizi cardiaci (convalatozidă) care pot fi periculoși dacă sunt ingerați. Fructele roșii de toamnă sunt deosebit de atrăgătoare și periculoase.",
+    tags: ["perenă", "aprilie-mai", "albă", "parfumată/toxică", "Asparagaceae"],
+    icon: "🌸"
+  },
+  {
+    name: "Zambilă",
+    latin: "Hyacinthus orientalis",
+    desc: "Zambila este una dintre cele mai apreciate bulboase ornamentale de primăvară, originară din zona Mediteranei și Asiei Mici, cultivată în Europa de peste 400 de ani. Florile sale dense, grupate în ciorchine compact pe o tulpină cărnoasă de 20–30 cm, pot fi albe, albastre, mov, roz sau galbene, și emană un parfum puternic, dulce și inconfundabil, specific primăverii. Fiecare floare individuală este tubulară, cu șase tepale răsfrânte, perfect simetrică. Bulbii sunt plantați toamna și înfloresc în martie–aprilie. În curtea liceului, zambilele formează pete de culoare vibrantă și parfum intens, transformând spațiul verde într-o experiență senzorială completă.",
+    tags: ["bulboasă", "martie-aprilie", "diverse culori", "parfumată", "Asparagaceae"],
+    icon: "💐"
+  },
+  {
+    name: "Numele florii va fi adăugat",
+    latin: "—",
+    desc: "Pagina 26 este rezervată pentru o nouă specie din catalogul floristice al liceului. Documentarea continuă pe măsură ce noi flori sunt identificate în incinta școlii.",
+    tags: ["în curs de identificare"],
+    icon: "🌸"
+  },
+  {
+    name: "Numele florii va fi adăugat",
+    latin: "—",
+    desc: "Pagina 27 este pregătită pentru o nouă descoperire botanică din spațiul verde al liceului. Fiecare specie nouă îmbogățește catalogul și cunoașterea ecologică a comunității școlare.",
+    tags: ["în curs de identificare"],
+    icon: "🌼"
+  },
+  {
+    name: "Numele florii va fi adăugat",
+    latin: "—",
+    desc: "Pagina 28 — o nouă floare urmează să fie identificată și documentată cu aceeași atenție botanică și pasiune pentru natură care caracterizează acest proiect.",
+    tags: ["în curs de identificare"],
+    icon: "🌻"
+  },
+  {
+    name: "Numele florii va fi adăugat",
+    latin: "—",
+    desc: "Pagina 29 este rezervată pentru penultima floare din catalogul curent. Proiectul de documentare a florei liceului rămâne deschis pentru noi adăugiri și completări.",
+    tags: ["în curs de identificare"],
+    icon: "🌺"
+  },
+  {
+    name: "Numele florii va fi adăugat",
+    latin: "—",
+    desc: "Ultima pagină a catalogului curent — loc simbolic rezervat celei de-a treizecea flori. Dacă biodiversitatea liceului o permite, proiectul poate continua cu volume suplimentare!",
+    tags: ["în curs de identificare"],
+    icon: "🌷"
+  },
+  {
+    name: "Numele florii va fi adaugat",
+    latin: "—",
+    desc: "Pagina 31 este rezervata pentru o noua specie identificata in incinta Liceului Tehnologic Nicolae Balcescu. Dupa identificare vor fi adaugate: denumirea populara, denumirea stiintifica, descrierea botanica, culoarea, perioada de inflorire si rolul ecologic.",
+    tags: ["in curs de identificare"],
+    icon: "🌸"
+  },
+  {
+    name: "Numele florii va fi adaugat",
+    latin: "—",
+    desc: "Pagina 32 este rezervata pentru o noua specie identificata in incinta Liceului Tehnologic Nicolae Balcescu. Dupa identificare vor fi adaugate: denumirea populara, denumirea stiintifica, descrierea botanica, culoarea, perioada de inflorire si rolul ecologic.",
+    tags: ["in curs de identificare"],
+    icon: "🌼"
+  },
+  {
+    name: "Numele florii va fi adaugat",
+    latin: "—",
+    desc: "Pagina 33 este rezervata pentru o noua specie identificata in incinta Liceului Tehnologic Nicolae Balcescu. Dupa identificare vor fi adaugate: denumirea populara, denumirea stiintifica, descrierea botanica, culoarea, perioada de inflorire si rolul ecologic.",
+    tags: ["in curs de identificare"],
+    icon: "🌻"
+  },
+  {
+    name: "Numele florii va fi adaugat",
+    latin: "—",
+    desc: "Pagina 34 este rezervata pentru o noua specie identificata in incinta Liceului Tehnologic Nicolae Balcescu. Dupa identificare vor fi adaugate: denumirea populara, denumirea stiintifica, descrierea botanica, culoarea, perioada de inflorire si rolul ecologic.",
+    tags: ["in curs de identificare"],
+    icon: "🌺"
+  },
+  {
+    name: "Numele florii va fi adaugat",
+    latin: "—",
+    desc: "Pagina 35 este rezervata pentru o noua specie identificata in incinta Liceului Tehnologic Nicolae Balcescu. Dupa identificare vor fi adaugate: denumirea populara, denumirea stiintifica, descrierea botanica, culoarea, perioada de inflorire si rolul ecologic.",
+    tags: ["in curs de identificare"],
+    icon: "🌷"
+  },
+  {
+    name: "Numele florii va fi adaugat",
+    latin: "—",
+    desc: "Pagina 36 este rezervata pentru o noua specie identificata in incinta Liceului Tehnologic Nicolae Balcescu. Dupa identificare vor fi adaugate: denumirea populara, denumirea stiintifica, descrierea botanica, culoarea, perioada de inflorire si rolul ecologic.",
+    tags: ["in curs de identificare"],
+    icon: "🌹"
+  },
+  {
+    name: "Numele florii va fi adaugat",
+    latin: "—",
+    desc: "Pagina 37 este rezervata pentru o noua specie identificata in incinta Liceului Tehnologic Nicolae Balcescu. Dupa identificare vor fi adaugate: denumirea populara, denumirea stiintifica, descrierea botanica, culoarea, perioada de inflorire si rolul ecologic.",
+    tags: ["in curs de identificare"],
+    icon: "💐"
+  },
+  {
+    name: "Numele florii va fi adaugat",
+    latin: "—",
+    desc: "Pagina 38 este rezervata pentru o noua specie identificata in incinta Liceului Tehnologic Nicolae Balcescu. Dupa identificare vor fi adaugate: denumirea populara, denumirea stiintifica, descrierea botanica, culoarea, perioada de inflorire si rolul ecologic.",
+    tags: ["in curs de identificare"],
+    icon: "🌿"
+  },
+  {
+    name: "Numele florii va fi adaugat",
+    latin: "—",
+    desc: "Pagina 39 este rezervata pentru o noua specie identificata in incinta Liceului Tehnologic Nicolae Balcescu. Dupa identificare vor fi adaugate: denumirea populara, denumirea stiintifica, descrierea botanica, culoarea, perioada de inflorire si rolul ecologic.",
+    tags: ["in curs de identificare"],
+    icon: "🌱"
+  },
+  {
+    name: "Numele florii va fi adaugat",
+    latin: "—",
+    desc: "Pagina 40 este rezervata pentru o noua specie identificata in incinta Liceului Tehnologic Nicolae Balcescu. Dupa identificare vor fi adaugate: denumirea populara, denumirea stiintifica, descrierea botanica, culoarea, perioada de inflorire si rolul ecologic.",
+    tags: ["in curs de identificare"],
+    icon: "🌾"
+  },
+  {
+    name: "Numele florii va fi adaugat",
+    latin: "—",
+    desc: "Pagina 41 este rezervata pentru o noua specie identificata in incinta Liceului Tehnologic Nicolae Balcescu. Dupa identificare vor fi adaugate: denumirea populara, denumirea stiintifica, descrierea botanica, culoarea, perioada de inflorire si rolul ecologic.",
+    tags: ["in curs de identificare"],
+    icon: "🌸"
+  }
+];
+
+var currentFlowerPage = 0;
+var TOTAL = 0;
+
+function showPage(id, btn) {
+  var pages = document.querySelectorAll('.page');
+  for (var p = 0; p < pages.length; p++) pages[p].classList.remove('active');
+  var btns = document.querySelectorAll('.nav-tabs button');
+  for (var b = 0; b < btns.length; b++) btns[b].classList.remove('active');
+  document.getElementById('page-' + id).classList.add('active');
+  btn.classList.add('active');
+}
+
+function buildFlowerCards() {
+  var wrapper = document.getElementById('flower-wrapper');
+  wrapper.innerHTML = '';
+  TOTAL = flowers.length;
+
+  for (var i = 0; i < flowers.length; i++) {
+    var f = flowers[i];
+    var card = document.createElement('div');
+    card.className = 'flower-card' + (i === 0 ? ' visible' : '');
+    card.id = 'fcard-' + i;
+
+    var isNamed = f.name && f.name.indexOf('Numele') !== 0;
+    var num = (i + 1 < 10 ? '0' : '') + (i + 1);
+
+    var latinHTML = isNamed
+      ? '<div class="flower-latin"><em>' + f.latin + '</em></div>'
+      : '<div class="flower-latin" style="color:#bbb;font-style:normal;font-size:0.85rem;">Specia va fi identificata in curand...</div>';
+
+    var tagsHTML = '';
+    for (var t = 0; t < f.tags.length; t++) {
+      tagsHTML += '<span class="tag">' + f.tags[t] + '</span>';
+    }
+
+    
+    var badgeEl = document.createElement('span');
+    badgeEl.className = 'page-badge';
+    badgeEl.textContent = 'Pagina ' + (i + 1) + ' / ' + flowers.length;
+
+    
+    var slot1 = document.createElement('div');
+    slot1.className = 'flower-image-slot';
+    var ph1 = document.createElement('div');
+    ph1.className = 'ph';
+    ph1.innerHTML = '<span class="image-placeholder-icon">' + f.icon + '</span><span class="image-placeholder-text">image' + (i+1) + '.png</span>';
+    var img1 = document.createElement('img');
+    img1.src = 'image' + (i+1) + '.png';
+    img1.alt = f.name;
+    img1.style.display = 'none';
+    (function(im, ph) {
+      im.onload = function() { ph.style.display = 'none'; im.style.display = 'block'; };
+      im.onerror = function() { im.style.display = 'none'; };
+    })(img1, ph1);
+    slot1.appendChild(badgeEl);
+    slot1.appendChild(ph1);
+    slot1.appendChild(img1);
+
+    
+    var slot2 = document.createElement('div');
+    slot2.className = 'flower-image-slot';
+    var ph2 = document.createElement('div');
+    ph2.className = 'ph';
+    ph2.innerHTML = '<span class="image-placeholder-icon">' + f.icon + '</span><span class="image-placeholder-text">image' + (i+1) + '00.png</span>';
+    var img2 = document.createElement('img');
+    img2.src = 'image' + (i+1) + '00.png';
+    img2.alt = f.name + ' 2';
+    img2.style.display = 'none';
+    (function(im, ph, sl) {
+      im.onload = function() { ph.style.display = 'none'; im.style.display = 'block'; };
+      im.onerror = function() { sl.style.display = 'none'; };
+    })(img2, ph2, slot2);
+    slot2.appendChild(ph2);
+    slot2.appendChild(img2);
+
+    
+    var slotEl = document.createElement('div');
+    slotEl.className = 'flower-slots-wrap';
+    slotEl.appendChild(slot1);
+    slotEl.appendChild(slot2);
+
+    var infoEl = document.createElement('div');
+    infoEl.className = 'flower-info';
+    infoEl.innerHTML =
+      '<div class="flower-number">Floarea #' + num + '</div>' +
+      '<h2 class="flower-name">' + f.name + '</h2>' +
+      latinHTML +
+      '<hr class="flower-divider">' +
+      '<p class="flower-desc">' + f.desc + '</p>' +
+      '<div class="flower-tags">' + tagsHTML + '</div>';
+
+    card.appendChild(slotEl);
+    card.appendChild(infoEl);
+    wrapper.appendChild(card);
+  }
+}
+
+function buildDots() {
+  var container = document.getElementById('page-dots');
+  container.innerHTML = '';
+  for (var i = 0; i < flowers.length; i++) {
+    (function(idx) {
+      var btn = document.createElement('button');
+      btn.className = 'page-btn' + (idx === 0 ? ' active' : '');
+      btn.textContent = idx + 1;
+      btn.setAttribute('aria-label', 'Pagina ' + (idx + 1));
+      btn.onclick = function() { goToFlowerPage(idx); };
+      container.appendChild(btn);
+    })(i);
+  }
+}
+
+function goToFlowerPage(idx) {
+  var cards = document.querySelectorAll('.flower-card');
+  for (var c = 0; c < cards.length; c++) cards[c].classList.remove('visible');
+  var btns = document.querySelectorAll('.page-btn');
+  for (var b = 0; b < btns.length; b++) btns[b].classList.toggle('active', b === idx);
+  document.getElementById('fcard-' + idx).classList.add('visible');
+  document.getElementById('page-indicator').textContent = 'Pagina ' + (idx + 1) + ' din ' + flowers.length;
+  currentFlowerPage = idx;
+  document.getElementById('flower-wrapper').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function changeFlowerPage(dir) {
+  var next = currentFlowerPage + dir;
+  if (next < 0) next = flowers.length - 1;
+  if (next >= flowers.length) next = 0;
+  goToFlowerPage(next);
+}
+
+document.addEventListener('keydown', function(e) {
+  if (document.getElementById('page-flowers').classList.contains('active')) {
+    if (e.key === 'ArrowRight') changeFlowerPage(1);
+    if (e.key === 'ArrowLeft') changeFlowerPage(-1);
+  }
+});
+
+function goFullscreen() {
+  var el = document.documentElement;
+  if (el.requestFullscreen) { el.requestFullscreen(); }
+  else if (el.webkitRequestFullscreen) { el.webkitRequestFullscreen(); }
+  else if (el.mozRequestFullScreen) { el.mozRequestFullScreen(); }
+  else if (el.msRequestFullscreen) { el.msRequestFullscreen(); }
+}
+
+var fsOverlay = document.getElementById('fs-overlay');
+fsOverlay.addEventListener('click', function() {
+  goFullscreen();
+  fsOverlay.classList.add('hide');
+  setTimeout(function() { fsOverlay.style.display = 'none'; }, 600);
+});
+
+buildFlowerCards();
+buildDots();
+</script>
+</body>
+</html>
